@@ -9,6 +9,7 @@ public class Main {
         List<Jogador> jogadores = new ArrayList<>();
         Scanner entrada = new Scanner(System.in);
         cargaDadosTestes(jogadores);
+
         String nome;
         int idade;
         System.out.println("Carga inicial finalizada");
@@ -25,9 +26,21 @@ public class Main {
         }while (true);
         System.out.println("Idade: ");
         idade = Integer.parseInt(entrada.nextLine());
-        jogadores.add(new Jogador(nome,idade,0,0));
+        Jogador ativo = new Jogador(nome,idade,0,0);
+
+        jogadores.add(ativo);
+
+        if(Jogo.jogar()){
+            System.out.println("Parabens você venceu");
+            ativo.adicionaPontos(1);
+            ativo.adicionaTentativa();
+        }else{
+            System.out.println("Infelizmente você perdeu");
+        }
 
         ordenaRanking(jogadores);
+        Jogo.setMelhorJogador(jogadores.get(0));
+        System.out.println("melhor jogador " + Jogo.getMelhorJogador().getNome());
         exibeRanking(jogadores);
     }
 
@@ -54,16 +67,16 @@ public class Main {
 
 
     public static void cargaDadosTestes(List<Jogador> jogadores){
-        jogadores.add(new Jogador("Leonardo", 30, 10,2));
-        jogadores.add(new Jogador("Andre", 30, 15,3));
-        jogadores.add(new Jogador("Gustavo", 30, 11,2));
-        jogadores.add(new Jogador("4", 30, 4,2));
-        jogadores.add(new Jogador("5", 30, 5,3));
-        jogadores.add(new Jogador("6", 30, 6,2));
-        jogadores.add(new Jogador("7", 30, 7,2));
-        jogadores.add(new Jogador("8", 30, 8,3));
-        jogadores.add(new Jogador("9", 30, 9,2));
-        jogadores.add(new Jogador("10", 30, 10,2));
+        jogadores.add(new Jogador("Leonardo", 30, 0,2));
+        jogadores.add(new Jogador("Andre", 30, 0,3));
+        jogadores.add(new Jogador("Gustavo", 30, 1,2));
+        jogadores.add(new Jogador("4", 30, 0,2));
+        jogadores.add(new Jogador("5", 30, 0,3));
+        jogadores.add(new Jogador("6", 30, 0,2));
+        jogadores.add(new Jogador("7", 30, 0,2));
+        jogadores.add(new Jogador("8", 30, 0,3));
+        jogadores.add(new Jogador("9", 30, 0,2));
+        jogadores.add(new Jogador("10", 30, 0,2));
         jogadores.add(new Jogador("0", 30, 0,2));
     }
 }
