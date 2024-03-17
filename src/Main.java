@@ -29,17 +29,20 @@ public class Main {
         Jogador ativo = new Jogador(nome,idade,0,0);
 
         jogadores.add(ativo);
+        System.out.println("Bem-vindo ao jogo de adivinhação!");
+        System.out.println("Você se sente confortavel em tentar um nume de 1 ate quanto? digite o limite superior abaixo.");
 
-        if(Jogo.jogar()){
+        if(Jogo.jogar(entrada.nextInt())){
             System.out.println("Parabens você venceu");
             ativo.adicionaPontos(1);
             ativo.adicionaTentativa();
         }else{
             System.out.println("Infelizmente você perdeu");
+            ativo.adicionaTentativa();
         }
 
         ordenaRanking(jogadores);
-        Jogo.setMelhorJogador(jogadores.get(0));
+        Jogo.setMelhorJogador(jogadores.getFirst());
         System.out.println("melhor jogador " + Jogo.getMelhorJogador().getNome());
         exibeRanking(jogadores);
     }

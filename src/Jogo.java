@@ -2,15 +2,13 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Jogo {
+    private static Random maquina = new Random();
+    private static Scanner entrada = new Scanner(System.in);
     private static Jogador melhorJogador;
     private static long numeroJogadas = 0;
 
     public static boolean jogar(){
-
         numeroJogadas++;
-
-        Random maquina = new Random();
-        Scanner entrada = new Scanner(System.in);
         int opcao;
 
         do{
@@ -35,6 +33,22 @@ public class Jogo {
             return true;
         }
 
+    }
+
+    public static boolean jogar(int num){
+        numeroJogadas++;
+        System.out.println("Tente adivinhar um número de 0 a " + num);
+
+        int numeroAleatorio = maquina.nextInt(num + 1);
+
+        System.out.print("Digite o seu palpite: ");
+        int palpite = entrada.nextInt();
+
+        if (palpite == numeroAleatorio) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public static Jogador getMelhorJogador() {
