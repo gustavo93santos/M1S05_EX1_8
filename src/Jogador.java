@@ -47,6 +47,3 @@ public class Jogador {
                 '}';
     }
 }
-//Primeiramente crie a Classe Jogador.
-//Cada vez que um jogo for instanciado devemos ter um novo objeto jogador.
-//O Jogador deve ter os métodos: adicionaPontos, perdePontos, adicionaTentativa.

@@ -3,51 +3,48 @@ import java.util.Scanner;
 
 public class Jogo {
     private static Random maquina = new Random();
-    private static Scanner entrada = new Scanner(System.in);
     private static Jogador melhorJogador;
     private static long numeroJogadas = 0;
 
-    public static boolean jogar(){
+    public static int jogar(){
         numeroJogadas++;
         int opcao;
 
         do{
-            System.out.println("Faça sua jogada \n" +
+            opcao = Utils.scanInt("Faça sua jogada \n" +
                     "0 = pedra \n" +
                     "1 = papel \n" +
                     "2 = tesoura \n");
-            opcao = Integer.parseInt(entrada.nextLine());
-            if (opcao <0 || opcao > 2){
+            if (opcao < 0 || opcao > 2){
                 System.out.println("Opção invalida.");
             }
         }while (opcao <0 || opcao > 2);
 
-        entrada.close();
+        int resultadoMaquina = maquina.nextInt(3);
 
-        if((opcao == 0 && maquina.nextInt(3) == 1) ||
-                (opcao == 1 && maquina.nextInt(3) == 2) ||
-                (opcao == 2 && maquina.nextInt(3) == 0))
-        {
-            return false;
+        if((opcao == 0 && resultadoMaquina == 1) ||
+                (opcao == 1 && resultadoMaquina == 2) ||
+                (opcao == 2 && resultadoMaquina== 0)) {
+            return 1;
+        } else if (opcao == resultadoMaquina) {
+            return -1;
         }else{
-            return true;
+            return 0;
         }
-
     }
 
-    public static boolean jogar(int num){
+    public static int jogar(int num){
         numeroJogadas++;
         System.out.println("Tente adivinhar um número de 0 a " + num);
 
         int numeroAleatorio = maquina.nextInt(num + 1);
 
-        System.out.print("Digite o seu palpite: ");
-        int palpite = entrada.nextInt();
+        int palpite = Utils.scanInt("Digite o seu palpite: ");
 
         if (palpite == numeroAleatorio) {
-            return true;
+            return 0;
         } else {
-            return false;
+            return 1;
         }
     }
 
@@ -67,14 +64,3 @@ public class Jogo {
         this.numeroJogadas = numeroJogadas;
     }
 }
-
-
-//Crie a Classe Jogo, essa classe vai ter o jogo em si, o jogo consiste em um pedra papel e tesoura,
-// que o jogador deve inserir a sua jogada e o sistema irá retorna se ele ganhou ou não.
-
-//O Jogo deve estar em um método jogar().
-
-//O Jogo deve ter o atributo, melhor jogador(melhorJogador) e deve ter o número de vezes
-// que o jogo foi jogado (numeroJogadas).
-
-//Cada vez que um jogador ganha ele deve receber mais um ponto, cada tentativa adiciona ao numero de tentativas.
